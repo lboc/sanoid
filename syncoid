@@ -804,8 +804,8 @@ sub getssh {
 		 $remoteuser =~ s/\@.*$//;
 		if ($remoteuser eq 'root') { $isroot = 1; } else { $isroot = 0; }
 		# now we need to establish a persistent master SSH connection
-		$socket = "/tmp/syncoid-$remoteuser-$rhost-" . time();
-		open FH, "$sshcmd -M -S $socket -o ControlPersist=1m $args{'sshport'} $rhost exit |";
+		$socket = "/tmp/syncoid-$remoteuser-$rhost-$fs" . time();
+		open FH, "$sshcmd -S $socket -o ControlPersist=1m $args{'sshport'} $rhost exit |";
 		close FH;
 		$rhost = "-S $socket $rhost";
 	} else {
